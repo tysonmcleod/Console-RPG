@@ -1,3 +1,7 @@
+import Characters.*;
+import Functionality.CreateCharacter;
+
+
 import java.util.Scanner;
 
 public class MainMenu {
@@ -8,7 +12,7 @@ public class MainMenu {
         System.out.println("Welcome \n 1\t Mage \n 2\t Ranger \n 3\t Rogue \n 4\t Warrior ");
 
         int chooseChar = 0;
-        int choice = 0;
+        int choice;
         Scanner scanner = new Scanner(System.in);
 
         do{
@@ -18,26 +22,25 @@ public class MainMenu {
                 scanner.next();
             }
             choice = scanner.nextInt();
-            switch (choice){
-                case 1:
+
+            switch (choice) {
+                case 1 -> {
                     System.out.println("Mage");
                     chooseChar = 1;
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     System.out.println("Ranger");
                     chooseChar = 1;
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     System.out.println("Rogue");
                     chooseChar = 1;
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     System.out.println("Warrior");
                     chooseChar = 1;
-                    break;
-
-                default:
-                    System.out.printf("Invalid choice");
+                }
+                default -> System.out.print("Invalid choice");
             }
         }while (chooseChar!=1);
 
@@ -48,9 +51,15 @@ public class MainMenu {
         scanner.nextLine();
         String charName = scanner.nextLine();
 
+        System.out.println(choice);
+        RPGCharacter character = CreateCharacter.createChar(choice);
+        assert character != null;
+        character.setName(charName);
         clearScreen();
 
         System.out.println("Welcome " + charName + "!");
+
+
 
         int quit = 0;
 
@@ -61,25 +70,19 @@ public class MainMenu {
                 scanner.next();
             }
             choice = scanner.nextInt();
-            switch (choice){
-                case 1:
-                    System.out.println("See stats");
-                    break;
-                case 2:
-                    System.out.println("Explore");
-                    break;
-                case 3:
+            switch (choice) {
+                case 1 -> character.displayAttributes();
+                case 2 -> System.out.println("Explore");
+                case 3 -> {
                     System.out.println("Attack");
-                    break;
-                case 4:
-                    System.out.println("Equip");
-                    break;
-                case 5:
+                    character.levelUp();
+                }
+                case 4 -> System.out.println("Equip");
+                case 5 -> {
                     System.out.println("Quit");
                     quit = 1;
-                    break;
-                default:
-                    System.out.printf("Invalid choice");
+                }
+                default -> System.out.print("Invalid choice");
             }
 
         }while (quit!=1);
@@ -89,7 +92,7 @@ public class MainMenu {
 
     public static void clearScreen(){
         for(int i = 0; i < 20; i++){
-            System.out.println("");
+            System.out.println();
         }
     }
 }
