@@ -6,6 +6,8 @@ import Items.Weapons.Weapon;
 
 import java.util.HashMap;
 
+import static Items.Slots.SlotType.WeaponSlot;
+
 public class Mage extends RPGCharacter {
     public Mage() {
         super(CharacterType.Mage,
@@ -31,8 +33,10 @@ public class Mage extends RPGCharacter {
             if (i < 1) {
                 throw new IllegalArgumentException("Level must be greater than zero");
             }else{
-                if(this.getDamage()>1) {
+                if (this.getWeaponHashMap().containsKey(WeaponSlot)) {
                 this.setDamage(((this.getDamage() / (100 + this.getIntelligence())) * (100 + this.getIntelligence() + 5)));
+                }else{
+                    this.setDamage(this.getDamage() *(1+(this.getIntelligence()/100)));
                 }
                 this.setLevel(this.getLevel()+1);
                 this.setVitality(this.getVitality()+3);

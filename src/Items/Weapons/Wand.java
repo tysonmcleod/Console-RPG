@@ -5,7 +5,7 @@ import Items.ItemType;
 import Items.Slots.SlotType;
 
 public class Wand extends Weapon{
-    public Wand(ItemType type, String name, int requiredLevel, SlotType slotType, WeaponType weaponType, int damage, int attackSpeed) {
+    public Wand(ItemType type, String name, int requiredLevel, SlotType slotType, WeaponType weaponType, double damage, double attackSpeed) {
         super(type, name, requiredLevel, slotType, weaponType, damage, attackSpeed);
     }
 
