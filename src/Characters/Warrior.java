@@ -1,5 +1,7 @@
 package Characters;
 
+import static Items.Slots.SlotType.WeaponSlot;
+
 public class Warrior extends RPGCharacter {
 
     public Warrior() {
@@ -7,7 +9,7 @@ public class Warrior extends RPGCharacter {
                 "",
                 1,
                 0,
-                1,
+                1.05,
                 2,
                 5,
                 1,
@@ -20,12 +22,15 @@ public class Warrior extends RPGCharacter {
     @Override
     public void levelUp(int i) {
         try {
-
+            //sSystem.out.println("Printing the hash map");
+            //System.out.println(this.weaponHashMap);
             if (i < 1) {
                 throw new IllegalArgumentException("Level must be greater than zero");
             } else {
-                if (this.getDamage() > 1) {
+                if (this.getWeaponHashMap().containsKey(WeaponSlot)) {
                     this.setDamage(this.getDamage() / (100 + this.getStrength()) * (100 + this.getStrength() + 3));
+                }else{
+                    this.setDamage((this.getDamage() *(1+this.getStrength()/100)));
                 }
                 this.setLevel(this.getLevel() + 1);
 

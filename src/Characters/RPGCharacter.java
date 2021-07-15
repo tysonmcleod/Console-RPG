@@ -7,7 +7,8 @@ import Items.Armor.ArmorType;
 import Items.Slots.SlotType;
 import Items.Weapons.Weapon;
 import Items.Weapons.WeaponType;
-
+import java.lang.Math;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public abstract class RPGCharacter {
     protected String name;
     protected int level;
     protected int exp;
-    protected int damage;
+    protected double damage;
 
     // primary attributes
     protected int strength;
@@ -37,8 +38,8 @@ public abstract class RPGCharacter {
     // TODO
     // use single item slot
 
-    private Map<SlotType, Armor> armorHashMap = new HashMap<SlotType, Armor>();
-    private Map<SlotType, Weapon> weaponHashMap = new HashMap<SlotType, Weapon>();
+    protected Map<SlotType, Armor> armorHashMap = new HashMap<SlotType, Armor>();
+    protected Map<SlotType, Weapon> weaponHashMap = new HashMap<SlotType, Weapon>();
 
     /*
         Getters and setters
@@ -68,11 +69,11 @@ public abstract class RPGCharacter {
         this.level = level;
     }
 
-    public int getDamage(){
+    public double getDamage(){
         return damage;
     }
 
-    public void setDamage(int damage){
+    public void setDamage(double damage){
         this.damage = damage;
     }
 
@@ -160,7 +161,7 @@ public abstract class RPGCharacter {
         Constructor
     */
 
-    public RPGCharacter(CharacterType type, String name, int level, int exp, int damage, int dexterity, int strength, int intelligence, int vitality, int health, int armorRating, int elementalResistance){
+    public RPGCharacter(CharacterType type, String name, int level, int exp, double damage, int dexterity, int strength, int intelligence, int vitality, int health, int armorRating, int elementalResistance){
         this.type = type;
         this.name = name;
         this.level = level;
@@ -309,23 +310,29 @@ public abstract class RPGCharacter {
 
     public void addWeaponStats(Weapon weapon){
 
-        int totalPrimaryAttributes = (this.getStrength() + this.getVitality() + this.getIntelligence() + this.getDexterity());
-        int updatedDamage = (weapon.getDamagePerSecond() * (1+(totalPrimaryAttributes/100)));
+        //double totalPrimaryAttributes = (this.getStrength() + this.getVitality() + this.getIntelligence() + this.getDexterity());
+        double weaponDamagePerSecond = weapon.getDamagePerSecond();
+        double totalPrimaryAttributes;
+        double result;
+
         CharacterType type = this.getType();
         switch (type) {
             case Warrior -> {
-                int strengthBonus = this.getStrength() + 100;
-                this.setDamage((updatedDamage / 100) * strengthBonus);
+                totalPrimaryAttributes = this.getStrength();
+                result = weaponDamagePerSecond * (1.0 + (totalPrimaryAttributes/100.0));
+                this.setDamage(result);
             }
             case Rogue, Ranger -> {
-                int dexterityBonus = this.getDexterity() + 100;
-                this.setDamage((updatedDamage / 100) * dexterityBonus);
+                totalPrimaryAttributes = this.getDexterity();
+                result = weaponDamagePerSecond*  (1.0 + (totalPrimaryAttributes/100.0));
+                this.setDamage(result);
             }
             case Mage -> {
-                int intelligenceBonus = this.getIntelligence() + 100;
-                this.setDamage((updatedDamage / 100) * intelligenceBonus);
+                totalPrimaryAttributes = this.getIntelligence();
+                result = weaponDamagePerSecond * (1.0 + (totalPrimaryAttributes/100.0));
+                this.setDamage(result);
             }
-            default -> this.setDamage(updatedDamage);
+            default -> this.setDamage(1);
         }
         //this.setDamage(weapon.getDamagePerSecond() * (1+(totalPrimaryAttributes/100)));
     }
@@ -348,8 +355,12 @@ public abstract class RPGCharacter {
         System.out.println("Health: " + this.getHealth());
         System.out.println("Armor rating: " + this.getArmorRating());
         System.out.println("Elemental resistance: " + this.getElementalResistance());
-        System.out.println("Damage: " + this.getDamage());
+        if(this.weaponHashMap.containsKey(SlotType.WeaponSlot) || this.getDamage() > 5){
+            System.out.println("Damage: " + Math.ceil(this.getDamage()));
+        }else{
+            System.out.println("Damage: " + this.getDamage());
 
+        }
     }
 
 

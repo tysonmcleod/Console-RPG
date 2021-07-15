@@ -6,9 +6,9 @@ import Items.Slots.SlotType;
 
 public abstract class Weapon extends Item {
     private WeaponType weaponType;
-    private int damage;
-    private int attackSpeed;
-    private int damagePerSecond;
+    private double damage;
+    private double attackSpeed;
+    private double damagePerSecond;
 
 
     // setters and getters
@@ -20,7 +20,7 @@ public abstract class Weapon extends Item {
         this.weaponType = weaponType;
     }
 
-    public int getDamage() {
+    public double getDamage() {
         return damage;
     }
 
@@ -28,7 +28,7 @@ public abstract class Weapon extends Item {
         this.damage = damage;
     }
 
-    public int getAttackSpeed() {
+    public double getAttackSpeed() {
         return attackSpeed;
     }
 
@@ -36,7 +36,7 @@ public abstract class Weapon extends Item {
         this.attackSpeed = attackSpeed;
     }
 
-    public int getDamagePerSecond() {
+    public double getDamagePerSecond() {
         return damagePerSecond;
     }
 
@@ -44,7 +44,7 @@ public abstract class Weapon extends Item {
         this.damagePerSecond = damagePerSecond;
     }
 
-    public Weapon(ItemType type, String name, int requiredLevel, SlotType slotType, WeaponType weaponType, int damage, int attackSpeed) {
+    public Weapon(ItemType type, String name, int requiredLevel, SlotType slotType, WeaponType weaponType, double damage, double attackSpeed) {
         super(type, name, requiredLevel, slotType);
         this.weaponType = weaponType;
         this.damage = damage;

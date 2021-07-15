@@ -1,5 +1,7 @@
 package Characters;
 
+import static Items.Slots.SlotType.WeaponSlot;
+
 public class Ranger extends RPGCharacter {
 
     public Ranger() {
@@ -23,8 +25,13 @@ public class Ranger extends RPGCharacter {
             if (i < 1) {
                 throw new IllegalArgumentException("Level must be greater than zero");
             }else{
-                if(this.getDamage()>1) {
+                if (this.getWeaponHashMap().containsKey(WeaponSlot)) {
                     this.setDamage(((this.getDamage() / (100 + this.getDexterity())) * (100 + this.getDexterity() + 5)));
+                }else{
+                    this.setDamage(this.getDamage()*(1+(this.getDexterity()/100)));
+                }
+                if(this.getDamage() == 0){
+                    this.setDamage(1);
                 }
                 this.setLevel(this.getLevel()+1);
 

@@ -5,7 +5,7 @@ import Items.ItemType;
 import Items.Slots.SlotType;
 
 public class Sword extends Weapon{
-    public Sword(ItemType type, String name, int requiredLevel, SlotType slotType, WeaponType weaponType, int damage, int attackSpeed) {
+    public Sword(ItemType type, String name, int requiredLevel, SlotType slotType, WeaponType weaponType, double damage, double attackSpeed) {
         super(type, name, requiredLevel, slotType, weaponType, damage, attackSpeed);
     }
 

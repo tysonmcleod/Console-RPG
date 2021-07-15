@@ -8,6 +8,7 @@ import Items.Item;
 import Items.ItemType;
 import Items.Slots.BodySlot;
 import Items.Slots.SlotType;
+import Items.Weapons.Axe;
 import Items.Weapons.Sword;
 import Items.Weapons.WeaponType;
 
@@ -88,6 +89,8 @@ public class MainMenu {
                     character.levelUp(1);
                 }
                 case 4 -> {
+
+
                     Plate bodyPlate = new Plate(ItemType.Armor, "Body Plate", 1, SlotType.BodySlot, ArmorType.Plate,10, 10, 10, 10 ) {
                     };
                     try{
@@ -96,10 +99,9 @@ public class MainMenu {
                         System.out.println(e.getMessage());
                     }
 
-
-                    Sword sword = new Sword(ItemType.Weapon, "Golden sword", 1, SlotType.WeaponSlot, WeaponType.Sword, 100, 10);
+                    Axe axe = new Axe(ItemType.Weapon, "Golden axe", 1, SlotType.WeaponSlot, WeaponType.Sword, 7, 1.1);
                     try{
-                        character.EquipWeapon(sword);
+                        character.EquipWeapon(axe);
                     }catch(Exception e){
                         System.out.println(e.getMessage());
                     }

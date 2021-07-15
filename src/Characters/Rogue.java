@@ -1,5 +1,7 @@
 package Characters;
 
+import Items.Slots.SlotType;
+
 public class Rogue extends RPGCharacter {
 
     public Rogue() {
@@ -23,9 +25,12 @@ public class Rogue extends RPGCharacter {
             if (i < 1) {
                 throw new IllegalArgumentException("Level must be greater than zero");
             }else{
-                if(this.getDamage()>1) {
+                if(this.getWeaponHashMap().containsKey(SlotType.WeaponSlot)) {
                     this.setDamage(((this.getDamage() / (100 + this.getDexterity())) * (100 + this.getDexterity() + 4)));
-                }
+                }else{
+                    this.setDamage(this.getDamage()*(1+(this.getDexterity()/100)));
+                    }
+
                 this.setLevel(this.getLevel()+1);
 
                 this.setVitality(this.getVitality()+3);

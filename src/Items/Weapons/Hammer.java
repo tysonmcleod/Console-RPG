@@ -5,7 +5,7 @@ import Items.ItemType;
 import Items.Slots.SlotType;
 
 public class Hammer extends Weapon{
-    public Hammer(ItemType type, String name, int requiredLevel, SlotType slotType, WeaponType weaponType, int damage, int attackSpeed) {
+    public Hammer(ItemType type, String name, int requiredLevel, SlotType slotType, WeaponType weaponType, double damage, double attackSpeed) {
         super(type, name, requiredLevel, slotType, weaponType, damage, attackSpeed);
     }
 
