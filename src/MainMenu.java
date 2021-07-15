@@ -1,8 +1,19 @@
 import Characters.*;
 import Functionality.CreateCharacter;
-
+import Items.Armor.Armor;
+import Items.Armor.ArmorType;
+import Items.Armor.Cloth;
+import Items.Armor.Plate;
+import Items.Item;
+import Items.ItemType;
+import Items.Slots.BodySlot;
+import Items.Slots.SlotType;
+import Items.Weapons.Sword;
+import Items.Weapons.WeaponType;
 
 import java.util.Scanner;
+import static Functionality.Utils.clearScreen;
+
 
 public class MainMenu {
 
@@ -15,9 +26,10 @@ public class MainMenu {
         int choice;
         Scanner scanner = new Scanner(System.in);
 
-        do{
+        CharacterType type = null;
+        do {
             System.out.println("Please choose your character");
-            while(!scanner.hasNextInt()){
+            while (!scanner.hasNextInt()) {
                 System.out.println("Choose a number between 1-4");
                 scanner.next();
             }
@@ -42,7 +54,7 @@ public class MainMenu {
                 }
                 default -> System.out.print("Invalid choice");
             }
-        }while (chooseChar!=1);
+        } while (chooseChar != 1);
 
 
         // createCharacter with choice
@@ -51,7 +63,6 @@ public class MainMenu {
         scanner.nextLine();
         String charName = scanner.nextLine();
 
-        System.out.println(choice);
         RPGCharacter character = CreateCharacter.createChar(choice);
         assert character != null;
         character.setName(charName);
@@ -60,12 +71,11 @@ public class MainMenu {
         System.out.println("Welcome " + charName + "!");
 
 
-
         int quit = 0;
 
-        do{
+        do {
             System.out.println("See stats(1) - Explore(2) - Attack(3) - Equip(4) - Quit(5)");
-            while(!scanner.hasNextInt()){
+            while (!scanner.hasNextInt()) {
                 System.out.println("Choose a number between 1-5");
                 scanner.next();
             }
@@ -75,9 +85,26 @@ public class MainMenu {
                 case 2 -> System.out.println("Explore");
                 case 3 -> {
                     System.out.println("Attack");
-                    character.levelUp();
+                    character.levelUp(1);
                 }
-                case 4 -> System.out.println("Equip");
+                case 4 -> {
+                    Plate bodyPlate = new Plate(ItemType.Armor, "Body Plate", 1, SlotType.BodySlot, ArmorType.Plate,10, 10, 10, 10 ) {
+                    };
+                    try{
+                        character.EquipArmor(bodyPlate);
+                    }catch(Exception e){
+                        System.out.println(e.getMessage());
+                    }
+
+
+                    Sword sword = new Sword(ItemType.Weapon, "Golden sword", 1, SlotType.WeaponSlot, WeaponType.Sword, 100, 10);
+                    try{
+                        character.EquipWeapon(sword);
+                    }catch(Exception e){
+                        System.out.println(e.getMessage());
+                    }
+
+                }
                 case 5 -> {
                     System.out.println("Quit");
                     quit = 1;
@@ -85,14 +112,10 @@ public class MainMenu {
                 default -> System.out.print("Invalid choice");
             }
 
-        }while (quit!=1);
+        } while (quit != 1);
         scanner.close();
 
     }
 
-    public static void clearScreen(){
-        for(int i = 0; i < 20; i++){
-            System.out.println();
-        }
-    }
+
 }
