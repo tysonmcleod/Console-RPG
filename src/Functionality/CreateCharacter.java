@@ -4,8 +4,8 @@ import Characters.*;
 
 
 public class CreateCharacter {
-    public static RPGCharacter createChar(int i){
-        switch(i) {
+    public static RPGCharacter createChar(int choice){
+        switch(choice) {
             case 1 -> {
                 return new Mage();
             }
