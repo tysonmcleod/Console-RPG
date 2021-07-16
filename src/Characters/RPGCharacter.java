@@ -38,7 +38,9 @@ public abstract class RPGCharacter {
     // TODO
     // use single item slot
 
+    // a characters armor inventory
     protected Map<SlotType, Armor> armorHashMap = new HashMap<SlotType, Armor>();
+    // a characters weapon inventory
     protected Map<SlotType, Weapon> weaponHashMap = new HashMap<SlotType, Weapon>();
 
     /*
@@ -183,8 +185,9 @@ public abstract class RPGCharacter {
 
     // TODO:
     // move to functionality:
-    // create exceptions
-    // create EquipItem
+
+
+    // function to equip armor
     public void EquipArmor(Armor armor) throws InvalidArmorException {
 
         if(!this.checkCorrectArmorType(armor.getArmorType())){
@@ -202,7 +205,7 @@ public abstract class RPGCharacter {
         }
     }
 
-
+    // function which checks if armor is of correct type
     public boolean checkCorrectArmorType(ArmorType armorType){
 
         CharacterType type = this.getType();
@@ -230,6 +233,8 @@ public abstract class RPGCharacter {
         return false;
     }
 
+    // function to update stats when armor is equipped
+
     public void addArmorStats(Armor armor){
         this.setStrength(this.getStrength()+armor.getExtraStrength());
         this.setDexterity(this.getDexterity()+armor.getExtraDexterity());
@@ -241,6 +246,8 @@ public abstract class RPGCharacter {
         this.setElementalResistance(this.getIntelligence());
 
     }
+
+    // function to update stats when armor is removed
 
     public void removeArmorStats(Armor armor){
         this.setStrength(this.getStrength()-armor.getExtraStrength());
@@ -260,6 +267,9 @@ public abstract class RPGCharacter {
      Character Weapon related methods
      */
 
+
+    // function to equip a weapon
+
     public void EquipWeapon(Weapon weapon) throws InvalidWeaponException {
 
         if(!this.checkCorrectWeaponType(weapon.getWeaponType())){
@@ -277,6 +287,7 @@ public abstract class RPGCharacter {
         }
     }
 
+    // function to check if weapon type is correct for the character
     public boolean checkCorrectWeaponType(WeaponType weaponType){
 
         CharacterType type = this.getType();
@@ -308,6 +319,7 @@ public abstract class RPGCharacter {
         return false;
     }
 
+    // function to update stats when weapon is equipped
     public void addWeaponStats(Weapon weapon){
 
         //double totalPrimaryAttributes = (this.getStrength() + this.getVitality() + this.getIntelligence() + this.getDexterity());
@@ -337,6 +349,7 @@ public abstract class RPGCharacter {
         //this.setDamage(weapon.getDamagePerSecond() * (1+(totalPrimaryAttributes/100)));
     }
 
+    // remove a characters damage when weapon is removed
     public void removeWeaponStats(Weapon weapon){
         this.setDamage(1);
     }
@@ -367,12 +380,6 @@ public abstract class RPGCharacter {
    /*
      Abstract methods to be implemented by characters
      */
-
-
-    // This is the function that is implemented by Mage.java , Warrior.java, Rogue.java, Ranger.java and updates
-    // everything (strength, dexterity, intelligence ...) except for the level and damage using the same functions
-
-
 
     // method to level up
     public abstract void levelUp(int i);

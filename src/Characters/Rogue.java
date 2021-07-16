@@ -19,6 +19,8 @@ public class Rogue extends RPGCharacter {
                 1);
     }
 
+
+    // custom level up method for this specific character
     @Override
     public void levelUp(int i) {
         try{

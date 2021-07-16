@@ -18,9 +18,12 @@ import static Functionality.Utils.clearScreen;
 
 public class MainMenu {
 
+    // A very simple game menu
+    // pre chosen functionality e.g, levelUp will hopefully be changed
+    // when other functions are complete
+
     public static void gameMenu() {
 
-        // A very simple menu
         System.out.println("Welcome \n 1\t Mage \n 2\t Ranger \n 3\t Rogue \n 4\t Warrior ");
 
         int chooseChar = 0;
@@ -74,6 +77,7 @@ public class MainMenu {
 
         int quit = 0;
 
+        // character and name are chosen - play until user chooses to quit
         do {
             System.out.println("See stats(1) - Explore(2) - Attack(3) - Equip(4) - Quit(5)");
             while (!scanner.hasNextInt()) {
@@ -83,14 +87,21 @@ public class MainMenu {
             choice = scanner.nextInt();
             switch (choice) {
                 case 1 -> character.displayAttributes();
-                case 2 -> System.out.println("Explore");
+                case 2 -> {
+                    System.out.println("Explore");
+                    System.out.println("You found the LeBron James Sword of Lakers in five");
+                    Sword sword = new Sword(ItemType.Weapon, "LeBronJamesSwordLakersInFive", 10, SlotType.WeaponSlot, WeaponType.Sword, 100, 100);
+                    try{
+                        character.EquipWeapon(sword);
+                    }catch(Exception e){
+                        System.out.println(e.getMessage());
+                    }
+                }
                 case 3 -> {
                     System.out.println("Attack");
                     character.levelUp(1);
                 }
                 case 4 -> {
-
-
                     Plate bodyPlate = new Plate(ItemType.Armor, "Body Plate", 1, SlotType.BodySlot, ArmorType.Plate,10, 10, 10, 10 ) {
                     };
                     try{

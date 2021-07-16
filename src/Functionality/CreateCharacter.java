@@ -2,7 +2,7 @@ package Functionality;
 
 import Characters.*;
 
-
+// Create character depending on user choice
 public class CreateCharacter {
     public static RPGCharacter createChar(int choice){
         switch(choice) {
