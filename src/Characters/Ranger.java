@@ -9,7 +9,7 @@ public class Ranger extends RPGCharacter {
                 "",
                 1,
                 0,
-                1,
+                1.07,
                 7,
                 1,
                 1,
@@ -27,9 +27,9 @@ public class Ranger extends RPGCharacter {
                 throw new IllegalArgumentException("Level must be greater than zero");
             }else{
                 if (this.getWeaponHashMap().containsKey(WeaponSlot)) {
-                    this.setDamage(((this.getDamage() / (100 + this.getDexterity())) * (100 + this.getDexterity() + 5)));
+                    this.setDamage(((this.getDamage() / (100.0 + (double) this.getDexterity())) * (100.0 + (double) this.getDexterity() + 5.0)));
                 }else{
-                    this.setDamage(this.getDamage()*(1+(this.getDexterity()/100)));
+                    this.setDamage((((double) this.getDexterity() + 100.0 + 5.0) / 100.0));
                 }
                 if(this.getDamage() == 0){
                     this.setDamage(1);
