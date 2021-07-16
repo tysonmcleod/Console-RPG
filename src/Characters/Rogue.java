@@ -9,7 +9,7 @@ public class Rogue extends RPGCharacter {
                 "",
                 1,
                 0,
-                1,
+                1.06,
                 6,
                 2,
                 1,
@@ -28,9 +28,9 @@ public class Rogue extends RPGCharacter {
                 throw new IllegalArgumentException("Level must be greater than zero");
             }else{
                 if(this.getWeaponHashMap().containsKey(SlotType.WeaponSlot)) {
-                    this.setDamage(((this.getDamage() / (100 + this.getDexterity())) * (100 + this.getDexterity() + 4)));
+                    this.setDamage(((this.getDamage() / (100.0 + (double) this.getDexterity())) * (100.0 + (double) this.getDexterity() + 4.0)));
                 }else{
-                    this.setDamage(this.getDamage()*(1+(this.getDexterity()/100)));
+                    this.setDamage((((double) this.getDexterity() + 100.0 + 4.0) / 100.0));
                     }
 
                 this.setLevel(this.getLevel()+1);

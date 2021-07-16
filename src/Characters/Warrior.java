@@ -30,9 +30,14 @@ public class Warrior extends RPGCharacter {
                 throw new IllegalArgumentException("Level must be greater than zero");
             } else {
                 if (this.getWeaponHashMap().containsKey(WeaponSlot)) {
-                    this.setDamage(this.getDamage() / (100 + this.getStrength()) * (100 + this.getStrength() + 3));
+                    this.setDamage(this.getDamage() / (100.0 + (double) this.getStrength()) * (100.0 + (double) this.getStrength() + 3.0));
+
+                    //double weaponDPS = this.weaponHashMap.get(WeaponSlot).getDamagePerSecond();
+                    //this.setDamage(weaponDPS*(1.0+(((double)this.getStrength()+ (double) this.weaponHashMap.get(WeaponSlot).getDamage())/100.0)));
+
+
                 }else{
-                    this.setDamage((this.getDamage() *(1+this.getStrength()/100)));
+                    this.setDamage((((double) this.getStrength() + 100.0 + 3.0) / 100.0));
                 }
                 this.setLevel(this.getLevel() + 1);
 

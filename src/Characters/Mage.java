@@ -14,7 +14,7 @@ public class Mage extends RPGCharacter {
                 "",
                 1,
                 0,
-                1,
+                1.08,
                 1,
                 1,
                 8,
@@ -36,9 +36,10 @@ public class Mage extends RPGCharacter {
                 throw new IllegalArgumentException("Level must be greater than zero");
             }else{
                 if (this.getWeaponHashMap().containsKey(WeaponSlot)) {
-                this.setDamage(((this.getDamage() / (100 + this.getIntelligence())) * (100 + this.getIntelligence() + 5)));
+                this.setDamage(((this.getDamage() / (100.0 + (this.getIntelligence()+0.0)) * (100.0 + (double) this.getIntelligence() + 5.0))));
                 }else{
-                    this.setDamage(this.getDamage() *(1+(this.getIntelligence()/100)));
+                    this.setDamage((((double) this.getIntelligence() + 100.0 + 5.0) / 100.0));
+
                 }
                 this.setLevel(this.getLevel()+1);
                 this.setVitality(this.getVitality()+3);
